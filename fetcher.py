@@ -8,6 +8,7 @@ import movie
 
 class Fetcher:
     count = 0
+    genresT = []
 
     def __init_(self):
         self.count = 0
@@ -24,7 +25,11 @@ class Fetcher:
                     name = data['results'][self.count]['title']
                     genres = []
                     for y in data['results'][self.count]['genre_ids']:
-                        genres.append((b for b in api.genre if b['id'] == y).next()['name'])
+                        gName = (b for b in api.genre if b['id'] == y).next()['name']
+                        genres.append(gName)
+                        if gName not in self.genresT:
+                            self.genresT.append(gName)
+
                     date = data['results'][self.count]['release_date']
                     m = movie.Movie(name, genres, date)
                     movieList.append(m)
@@ -44,3 +49,6 @@ f.fetch(movieList, 10)
 
 for x in movieList:
     print "Movie: " +x.getName()+ "\n Genre: " + ' '.join(x.getGenres())+ "\n  Release Date: " +x.getDate()+ "\n"
+
+print "Total Genres: " + str(len(f.genresT)) + ""
+print "Genres: " + ', '.join(f.genresT)
