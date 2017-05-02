@@ -29,17 +29,27 @@ class Fetcher:
                         genres.append(gName)
                         if gName not in self.genresT:
                             self.genresT.append(gName)
-
                     date = data['results'][self.count]['release_date']
                     m = movie.Movie(name, genres, date)
                     movieList.append(m)
                     self.count += 1
+
+                    print "fetch successful, # of movies in the list: " +str(self.count)
+                    print " # of genres: " +str(len(self.genresT))
+            else:
+                print "Cannot fetch anymore new movies, no more in existent"
         else:
+            print "API fetch failed, try again"
             return False
 
     def printMovieList(self, movieList):
         for x in movieList:
-            print()
+            print "Movie: " + x.getName() + "\n Genre: " + ', '.join(
+                x.getGenres()) + "\n  Release Date: " + x.getDate() + "\n"
+
+    def printGenres(self):
+        print "Total Genres: " + str(len(self.genresT)) + ""
+        print "Genres: " + ', '.join(self.genresT)
 
 
 movieList = []
@@ -47,8 +57,6 @@ f = Fetcher()
 f.fetch(movieList, 3)
 f.fetch(movieList, 10)
 
-for x in movieList:
-    print "Movie: " +x.getName()+ "\n Genre: " + ' '.join(x.getGenres())+ "\n  Release Date: " +x.getDate()+ "\n"
+f.printMovieList(movieList)
+f.printGenres()
 
-print "Total Genres: " + str(len(f.genresT)) + ""
-print "Genres: " + ', '.join(f.genresT)
