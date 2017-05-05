@@ -8,9 +8,12 @@ import requests
 
 v3 = '?api_key=869b54a272f385c15528cc1742110c86';
 base = 'https://api.themoviedb.org/3/'
+genre = 'genre/movie/list'
+popular = 'movie/popular'
+theater = 'movie/now_playing'
 end = '&language=en-US&page=1'
 
-response = requests.get(base + "genre/movie/list" + v3 + end)
+response = requests.get(base + genre + v3 + end)
 data = response.json()
 genre = data['genres']
 
