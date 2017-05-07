@@ -21,30 +21,31 @@ class Fetcher:
             return False
 
         if type is 'theater':
-            type = self.theater
-        else:
-            type = self.popular
-
-        if type is self.theater:
             response = requests.get(api.base + api.theater + api.v3 + api.end)
+            ct = self.theater
         else:
             response = requests.get(api.base + api.popular + api.v3 + api.end)
+            ct = self.popular
 
         if response.status_code == 200:
             data = response.json()
-            if type < data['total_results']:
+            if ct < data['total_results']:
                 for x in range(0, a):
-                    name = data['results'][type]['title']
+                    name = data['results'][ct]['title']
                     genres = []
-                    for y in data['results'][type]['genre_ids']:
+                    for y in data['results'][ct]['genre_ids']:
                         gName = (b for b in api.genre if b['id'] == y).next()['name']
                         genres.append(gName)
                         if gName not in self.genresT:
                             self.genresT.append(gName)
-                    date = data['results'][type]['release_date']
+                    date = data['results'][ct]['release_date']
                     m = movie.Movie(name, genres, date)
                     movieList.append(m)
-                    type += 1
+                    ct += 1
+                    if type is 'theater':
+                        self.theater += 1
+                    else:
+                        self.popular += 1
 
                     print "fetch successful, # of movies in the list "+str(type) +""
                     print " # of genres: " +str(len(self.genresT))
@@ -64,16 +65,4 @@ class Fetcher:
         print "Genres: " + ', '.join(self.genresT)
 
 
-popular = []
-theater = []
-f = Fetcher()
-
-""" fetch(movieList Object, # of movies to fetch, 'popular' or 'theater')"""
-f.fetch(popular, 3, 'popular')
-f.fetch(theater, 4, 'theater')
-
-f.printMovieList(popular)
-
-f.printMovieList(theater)
-f.printGenres()
 
