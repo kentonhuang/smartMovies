@@ -50,9 +50,9 @@ class Fetcher:
                     print " # of genres: " +str(len(self.genresT))
             else:
                 print "Cannot fetch anymore new movies, no more in existent"
+                return False
         else:
             print "API fetch failed, try again"
-            return False
 
     def printMovieList(self, movieList):
         for x in movieList:
@@ -65,15 +65,4 @@ class Fetcher:
 
 
 popular = []
-theater = []
 f = Fetcher()
-
-""" fetch(movieList Object, # of movies to fetch, 'popular' or 'theater')"""
-f.fetch(popular, 3, 'popular')
-f.fetch(theater, 4, 'theater')
-
-f.printMovieList(popular)
-
-f.printMovieList(theater)
-f.printGenres()
-
