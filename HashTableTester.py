@@ -17,7 +17,11 @@ print Hash.Hello() # check results
 
 movie = comp.returnMovie(moviesInThreates, Hash)
 for key, value in movie.iteritems():
+    #How to get movie info
     print key.getName()
     print key.getDate()
     print key.getGenres()
+    #Gets movie's prob
+    print movie[key][0]
+    #Gets movie's true/false above/below threshold boolean
     print movie[key][1]

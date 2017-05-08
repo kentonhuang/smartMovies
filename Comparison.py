@@ -29,7 +29,7 @@ def returnMovie(theaterMovies, genreProbabilities):
     movieProbabilityNormalized = normalizeMovieGenres(movieProbability)
     #print(movieProbabilityNormalized)
     moviesAndProbabilities = zip(theaterMovies, movieProbabilityNormalized)
-    print(moviesAndProbabilities)
+    #print(moviesAndProbabilities)
 
     #Threshold (What should this number be?)
     threshold = 0.3
