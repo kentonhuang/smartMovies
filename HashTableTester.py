@@ -15,6 +15,7 @@ Hash.updateProbs(R) # call update function
 print Hash.getProbability("Action") # Test getProbabilty function
 print Hash.Hello() # check results
 
+#Input moviesInTheater list, and Hash Table with genres returns a Movie Object
 movie = comp.returnMovie(moviesInThreates, Hash)
 for key, value in movie.iteritems():
     #How to get movie info
