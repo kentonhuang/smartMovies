@@ -97,3 +97,13 @@ class HT:
     def getProbability(self,genre):
         num = self.normalizeProbs()
         return self.probs[genre]*num
+        
+    def topGenre(self):
+        genName = self.genres[0]
+        genMax = self.probs[self.genres[0]]
+        for gen in self.genres:
+            if (self.probs[gen] > genMax):
+                genName = gen
+                genMax = self.probs[gen]
+        return genName 
+                
