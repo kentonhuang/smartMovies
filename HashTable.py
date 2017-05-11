@@ -104,7 +104,21 @@ class HT:
             if (self.probs[gen] > genMax):
                 genName = gen
                 genMax = self.probs[gen]
-        return genName 
+        return genName
+
+    def secondTopGenre(self):
+        top = self.topGenre()
+        genName = self.genres[0]
+        genMax = self.probs[genName]
+        if top is self.genres[0]:
+            genName = self.genres[1]
+            genMax =self.probs[genName]
+        for gen in self.genres:
+            if (self.probs[gen] > genMax and gen is not top):
+                genName = gen
+                genMax = self.probs[genName]
+        return genName
+
         
     #Probailties for genres and conditionals 
                 
