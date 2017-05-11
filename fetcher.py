@@ -17,6 +17,7 @@ class Fetcher:
     smart_page = 1
     genresT = []
     smart_genresT = []
+    smart_movies = []
 
     def __init__(self):
         pass
@@ -47,14 +48,16 @@ class Fetcher:
                 if top in genres and second in genres:  # check if top & second genre is in the current movie Genre list
                     # movie has the top and second genre, complete gathering information
                     name = data['results'][ct]['original_title']
-                    date = data['results'][ct]['release_date']
-                    m = movie.Movie(name, genres, date)
-                    movieList.append(m)  # add it to the movieList passed in the funct. arguments
-                    if top not in self.smart_genresT:
-                        self.smart_genresT.append(top)
-                    if second not in self.smart_genresT:
-                        self.smart_genresT.append(second)
-                    x += 1
+                    if name not in self.smart_movies: #to ensure movies aren't double fetched
+                        self.smart_movies.append(name)
+                        date = data['results'][ct]['release_date']
+                        m = movie.Movie(name, genres, date)
+                        movieList.append(m)  # add it to the movieList passed in the funct. arguments
+                        if top not in self.smart_genresT:
+                            self.smart_genresT.append(top)
+                        if second not in self.smart_genresT:
+                            self.smart_genresT.append(second)
+                        x += 1
                 self.smart += 1
                 ct = self.smart
             else:
@@ -71,6 +74,9 @@ class Fetcher:
                     return False
 
                 data = response.json()
+
+        self.smart = 0
+        self.smart_page = 1
 
     def fetch(self, movieList, a=1, type='theater'):
         if movieList is None:
