@@ -84,16 +84,27 @@ class HT:
                 self.probs[gen] = self.probs[gen] + 0.1
     #normalize function
     #return float
-    def normalizeProbs(self):
-        probToNorm = []
-        for gen in self.genres:
-            if self.probs[gen] is not None:
-                probToNorm.append(self.probs[gen])
-        prob_factor = 1 / sum(probToNorm)
-        return prob_factor
+    #def normalizeProbs(self):
+        
     #get probabilty of a genre 
     #param: genre as a string 
     #return: float number 
     def getProbability(self,genre):
-        num = self.normalizeProbs()
-        return self.probs[genre]*num
+        probToNorm = []
+        for gen in self.genres:
+            if self.probs[gen] is not None:
+                probToNorm.append(self.probs[gen])
+        prob_factor = self.probs[genre]/ sum(probToNorm)
+        return prob_factor
+        
+    def topGenre(self):
+        genName = self.genres[0]
+        genMax = self.probs[self.genres[0]]
+        for gen in self.genres:
+            if (self.probs[gen] > genMax):
+                genName = gen
+                genMax = self.probs[gen]
+        return genName 
+        
+    #Probailties for genres and conditionals 
+                
