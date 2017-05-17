@@ -48,6 +48,10 @@ class Fetcher:
                 if top in genres and second in genres:  # check if top & second genre is in the current movie Genre list
                     # movie has the top and second genre, complete gathering information
                     name = data['results'][ct]['original_title']
+                    if not self.isEnglish(name):
+                        self.smart += 1
+                        ct = self.smart
+                        continue
                     if name not in self.smart_movies: #to ensure movies aren't double fetched
                         self.smart_movies.append(name)
                         date = data['results'][ct]['release_date']
@@ -98,6 +102,14 @@ class Fetcher:
         while x < a:
             if ct < len(data['results']):
                 name = data['results'][ct]['original_title']
+                if not self.isEnglish(name):
+                    if type is 'theater':
+                        self.theater += 1
+                    else:
+                        self.popular += 1
+                    ct += 1
+                    x += 1
+                    continue
                 genres = []
                 for y in data['results'][ct]['genre_ids']:
                     gName = (b for b in api.genre if b['id'] == y).next()['name']
@@ -137,6 +149,9 @@ class Fetcher:
                 else:
                     print "API fetch error"
                     return False
+
+    def isEnglish(self, s):
+        return all(ord(c) < 128 for c in s)
 
     def printMovieList(self, movieList):
         for x in movieList:
