@@ -9,12 +9,15 @@ user = user_input.NewUser()
 moviesInThreates = user.get_movies_threates()
 Hash = h.HT([]) 
 foundMovie = False
-runCount = 0
+
 while foundMovie == False:
-    runCount = runCount+1
+    user.runCount = user.runCount+1
     print ""
     print "-------------------------------------------"
-    print "Run:", runCount, " Performance Measure:", user.performanceMeasure
+    print "Run:", user.runCount, " Performance Measure:", user.performanceMeasure
+
+    
+     
     user_movie_genre = user.get_genre(Hash)
     if user_movie_genre!= False:
         Hash.updateProbs(user_movie_genre) 
@@ -22,12 +25,14 @@ while foundMovie == False:
         #Input moviesInTheater list, and Hash Table with genres returns a Movie Object
         movie = comp.returnMovie(moviesInThreates, Hash)
         for key, value in movie.iteritems():
-        #How to get movie info
-            print "      Name:", key.getName()
-            print "      Date:", key.getDate()
-            print "      Genres:", key.getGenres()
             #Gets movie's prob
-            print "      Prob:", movie[key][0]
-            #Gets movie's true/false above/below threshold boolean
-            print "      Recommended:",movie[key][1]
-
+            #The run count has to be over 6 for the db to be properly primed
+            print movie[key][1]
+            if user.runCount > 6:
+                if movie[key][1] == True:                
+                    foundMovie = True
+                    print "      Recommended Movie:", key.getName()
+                    
+    if user.performanceMeasure < -10 or  user.runCount > 15:
+        foundMovie = True
+        print "There are no recommended movies for you in Theaters"
