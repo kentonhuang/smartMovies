@@ -13,7 +13,10 @@ class NewUser:
     #List of movie genres as stated on IMBD
     #List of user choosen genre that will be returned
    
-    performanceMeasure = 2
+    #Start program with defualt PM of 5
+    performanceMeasure = 5
+    #Lets program know if DB has been primed or not
+    runCount = 0;
     users_movie_genre_valid = []
     movieList = []
     moviePresented = [];
@@ -29,7 +32,7 @@ class NewUser:
     def get_genre(self, HashINC):
         #Prints welcome message and shows user list of valid genres
         self.Hash = HashINC
-        if self.performanceMeasure < 0: 
+        if self.performanceMeasure < 0 or self.runCount > 15: 
             print "Smart Fetch" 
             self.f.smartFetch(self.Hash, self.movieList, 3) # Will add 3 movies that has the top 2 genres from the Hash table
         
