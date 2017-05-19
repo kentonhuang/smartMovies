@@ -33,6 +33,6 @@ while foundMovie == False:
                     foundMovie = True
                     print "      Recommended Movie:", key.getName()
                     
-    if user.performanceMeasure < -10 or  user.runCount > 15:
+    if user.performanceMeasure < -10 or  user.runCount > 25:
         foundMovie = True
         print "There are no recommended movies for you in Theaters"
