@@ -32,7 +32,7 @@ def returnMovie(theaterMovies, genreProbabilities):
     #print(moviesAndProbabilities)
 
     #Threshold (What should this number be?)
-    threshold = 0.2
+    threshold = 0.22
     topmovieProb = 0
 
     for movie, probability in moviesAndProbabilities:
