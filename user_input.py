@@ -22,6 +22,7 @@ class NewUser:
     moviePresented = [];
     f = fetcher.Fetcher()
     moviesInThreates = []
+    db_primed = False
     f.fetch(moviesInThreates, 8, 'theater')
     f.printMovieList(moviesInThreates)
     Hash = h.HT([]) 
@@ -32,7 +33,7 @@ class NewUser:
     def get_genre(self, HashINC):
         #Prints welcome message and shows user list of valid genres
         self.Hash = HashINC
-        if self.performanceMeasure < 0 or self.runCount > 15: 
+        if (self.performanceMeasure < 0 or self.runCount > 15) and self.db_primed == True: 
             print "Smart Fetch" 
             self.f.smartFetch(self.Hash, self.movieList, 3) # Will add 3 movies that has the top 2 genres from the Hash table
         
@@ -84,6 +85,7 @@ class NewUser:
         i = 0
         while i < len(list_of_movies_liked):
             #print self.movieList[int(list_of_movies_liked[i])].getName(), "  ,", self.movieList[int(list_of_movies_liked[i])].getGenres()
+            self.db_primed = True
             for movie in self.movieList[int(list_of_movies_liked[i])].getGenres():
                  list_of_all_genres.append(movie)
             i += 1
