@@ -5,11 +5,13 @@ import LearningElement
 import user_input
 import fetcher
 
+#Call other modules
 user = user_input.NewUser()
 moviesInThreates = user.get_movies_threates()
 Hash = h.HT([]) 
 foundMovie = False
 
+#Run while movie is not found, or until no movie is recommended
 while foundMovie == False:
     user.runCount = user.runCount+1
     print ""
