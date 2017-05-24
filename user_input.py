@@ -34,7 +34,7 @@ class NewUser:
         #Prints welcome message and shows user list of valid genres
         self.Hash = HashINC
         if (self.performanceMeasure < 0 or self.runCount > 15) and self.db_primed == True: 
-            print "Smart Fetch" 
+            print "Smart Fetch- Now looking for user's liked genres" 
             self.f.smartFetch(self.Hash, self.movieList, 3) # Will add 3 movies that has the top 2 genres from the Hash table
         
         else:
