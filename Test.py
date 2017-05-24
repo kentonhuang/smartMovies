@@ -33,7 +33,9 @@ while foundMovie == False:
                 if movie[key][1] == True:                
                     foundMovie = True
                     print "      Recommended Movie:", key.getName()
+                    print "      Please restart Kernal if you want to try again"
                     
     if user.performanceMeasure < -10 or  user.runCount > 25:
         foundMovie = True
         print "There are no recommended movies for you in Theaters"
+        print "Please restart Kernal if you want to try again"
