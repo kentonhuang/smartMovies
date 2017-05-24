@@ -28,6 +28,7 @@ while foundMovie == False:
             #Gets movie's prob
             #The run count has to be over 6 for the db to be properly primed
             print movie[key][1]
+            print movie[key][0]
             if user.runCount > 6:
                 if movie[key][1] == True:                
                     foundMovie = True
